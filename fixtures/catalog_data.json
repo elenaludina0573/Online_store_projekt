@@ -1,0 +1,104 @@
+[
+  {
+    "model": "catalog.category",
+    "pk": 1,
+    "fields": {
+      "name": "Хлебобулочные изделия",
+      "description": ""
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 2,
+    "fields": {
+      "name": "Молочные продукты",
+      "description": ""
+    }
+  },
+  {
+    "model": "catalog.category",
+    "pk": 4,
+    "fields": {
+      "name": "Сладости",
+      "description": null
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+      "name": "Хлеб ржаной",
+      "description": "",
+      "picture": "",
+      "categoty": 1,
+      "purchase_price": 40,
+      "created_at": "2024-04-07T08:44:24.024Z",
+      "updated_at": "2024-04-07T08:44:24.024Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+      "name": "Булочка с маком",
+      "description": "",
+      "picture": "",
+      "categoty": 1,
+      "purchase_price": 17,
+      "created_at": "2024-04-07T08:45:06.702Z",
+      "updated_at": "2024-04-07T08:45:06.702Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+      "name": "Батон \"Новинка\"",
+      "description": "",
+      "picture": "",
+      "categoty": 1,
+      "purchase_price": 35,
+      "created_at": "2024-04-07T08:45:45.818Z",
+      "updated_at": "2024-04-07T08:45:45.818Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+      "name": "Молоко отборное",
+      "description": "",
+      "picture": "",
+      "categoty": 2,
+      "purchase_price": 75,
+      "created_at": "2024-04-07T08:46:37.353Z",
+      "updated_at": "2024-04-07T08:46:37.353Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+      "name": "Творог 5%",
+      "description": "",
+      "picture": "",
+      "categoty": 2,
+      "purchase_price": 36,
+      "created_at": "2024-04-07T08:47:01.389Z",
+      "updated_at": "2024-04-07T08:47:01.389Z"
+    }
+  },
+  {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+      "name": "Кефир обезжиренный",
+      "description": "",
+      "picture": "",
+      "categoty": 2,
+      "purchase_price": 42,
+      "created_at": "2024-04-07T08:47:33.766Z",
+      "updated_at": "2024-04-07T08:47:33.766Z"
+    }
+  }
+]
