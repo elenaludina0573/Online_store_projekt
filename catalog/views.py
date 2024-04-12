@@ -1,11 +1,20 @@
 from django.shortcuts import render
+from catalog.models import Category
 
 
 def index(request):
     return render(request, 'catalog/home.html')
 
 
-def index_2(request):
+def index_1(request, pk):
+    context = {
+         'object_list': Category.objects.get(pk=pk),
+         'title': 'Магазин продуктов'
+    }
+    return render(request, 'catalog/index.html', context)
+
+
+def contact(request):
     if request.method == 'POST':
         name = request.POST.get('name')
         email = request.POST.get('email')
