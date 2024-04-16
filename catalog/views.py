@@ -3,18 +3,18 @@ from catalog.models import Product
 
 
 def home(request):
-    products_list = Product.objects.order_by("updated_at")
-    context = {"products": products_list[:5:-1], "title": "Продукты на любой вкус"}
+    context = {"object_list": Product.objects.all(),
+               "title": "Продукты на любой вкус"}
     return render(request, "catalog/home.html", context)
 
 
-def index(request, pk):
+def product(request, pk):
     product_item = Product.objects.get(pk=pk)
     context = {
-        "product": Product.objects.filter(pk=pk),
+        "object": Product.objects.get(pk=pk),
         "title": product_item.name,
     }
-    return render(request, "catalog/index.html", context=context)
+    return render(request, "catalog/product.html", context=context)
 
 
 def contacts(request):
