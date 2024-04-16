@@ -1,32 +1,33 @@
 {% extends 'catalog/base.html' %}
 {% block content %}
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">Skystore</h1>
-    <p class="lead">{{ title }}</p>
+<div class="pricing-header px-3 py-3 pt-md-3 pb-md-3 mx-auto text-center">
+   <h1 class="display-4">Магазин</h1>
+   <p class="lead">{{ title }}</p>
 </div>
 <form method="post" action="" class="form-floating">
-    {% csrf_token %}
-    <div class="row">
-        {% for product in products %}
-        <div class="col-4">
-            <div class="card mb-4 box-shadow">
-                <div class="card-header">
-                    <h4 class="my-0 font-weight-normal">
-                        {{product.name|title}}</h4>
-                    </di
-                    <div class="card-body">
-                        <h1 class="card-title pricing-card-title">$ {{product.purchase_price}}</h1>
-                        <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        </ul>
-                        <a type="button" class="btn btn-lg btn-block btn-outline-primary"
-                           href="{% url 'catalog:index' product.pk %}">
-                            Подробнее
-                        </a>
-                    </div>
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-    </div>
+   {% csrf_token %}
+   <div class="row">
+       {% for object in object_list|slice:5 %}
+       <div class="row row-cols-1 row-cols-md-2 g-4">
+           <div class="col-4">
+               <div class="card mb-6 box-shadow">
+                   <div class="card-header">
+                       <h4 class="my-0 font-weight-normal">
+                           {{object.name|title}}</h4>
+                       <div class="card-body">
+                           <h1 class="card-title pricing-card-title">$ {{object.purchase_price}}</h1>
+                           <ul class="list-unstyled mt-3 mb-4 text-start m-3">
+                           </ul>
+                           <a type="button" class="btn btn-lg btn-block btn-outline-primary"
+                              href="{% url 'catalog:product' object.pk %}">
+                               Подробнее
+                           </a>
+                       </div>
+                   </div>
+               </div>
+               {% endfor %}
+           </div>
+       </div>
+
 </form>
 {% endblock %}
