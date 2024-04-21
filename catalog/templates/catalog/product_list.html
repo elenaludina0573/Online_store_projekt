@@ -19,15 +19,15 @@
                            <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                            </ul>
                            <a type="button" class="btn btn-lg btn-block btn-outline-primary"
-                              href="{% url 'catalog:product' object.pk %}">
+                              href="{% url 'catalog:product_detail' object.pk %}">
                                Подробнее
                            </a>
+                           <button type="button" class="btn btn-lg btn-block btn-outline-primary">Оформить заказ</button>
                        </div>
                    </div>
                </div>
                {% endfor %}
            </div>
        </div>
-
 </form>
 {% endblock %}
