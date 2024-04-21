@@ -31,3 +31,34 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
+
+
+class Contacts(models.Model):
+    city = models.CharField(max_length=50, verbose_name="Страна")
+    identity_nalog_number = models.IntegerField(verbose_name="ИНН")
+    address = models.TextField(verbose_name="Адрес")
+    slug = models.CharField(max_length=255, verbose_name="URL", **NULLABLE)
+
+    def __str__(self):
+        return f"{self.city} {self.identity_nalog_number} {self.address}"
+
+    class Meta:
+        verbose_name = "Контакт"
+        verbose_name_plural = "Контакты"
+
+
+class Blogpost(models.Model):
+    title = models.CharField(max_length=255, verbose_name="Заголовок")
+    slug = models.CharField(max_length=255, verbose_name="URL", **NULLABLE)
+    content = models.TextField(verbose_name="Контент")
+    preview = models.ImageField(upload_to='catalog/', **NULLABLE)
+    created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
+    publication_sign = models.BooleanField(default=False, verbose_name="Опубликовать")
+    number_of_views = models.IntegerField(default=0, verbose_name="Количество")
+
+    def __str__(self):
+        return f'{self.title}'
+
+    class Meta:
+        verbose_name = 'Запись'
+        verbose_name_plural = 'Записи'
