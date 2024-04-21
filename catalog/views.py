@@ -1,26 +1,78 @@
 from django.shortcuts import render
-from catalog.models import Product
+from catalog.models import Product, Contacts, Blogpost
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.urls import reverse_lazy
 
 
-def home(request):
-    context = {"object_list": Product.objects.all(),
-               "title": "Продукты на любой вкус"}
-    return render(request, "catalog/home.html", context)
+class ProductListView(ListView):
+    model = Product
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Продукты на любой вкус'
+        return context
 
 
-def product(request, pk):
-    product_item = Product.objects.get(pk=pk)
-    context = {
-        "object": Product.objects.get(pk=pk),
-        "title": product_item.name,
-    }
-    return render(request, "catalog/product.html", context=context)
+class ProductDetailView(DetailView):
+    model = Product
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        product_item = self.get_object()
+        context['product_item'] = product_item
+        context['title'] = f'Продукт #{product_item.id}'
+        return context
 
 
-def contacts(request):
-    if request.method == 'POST':
-        name = request.POST.get('name')
-        email = request.POST.get('email')
-        message = request.POST.get('message')
-        print(f'You have new message from {name}({email}): {message}')
-    return render(request, 'catalog/contacts.html')
+class ContactsView(ListView):
+    model = Contacts
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Контакты'
+        return context
+
+
+class BlogpostListView(ListView):
+    model = Blogpost
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Блог'
+        return context
+
+
+class BlogpostCreateView(CreateView):
+    model = Blogpost
+    fields = '__all__'
+    template_name = 'catalog/blogpost_from.html'
+    success_url = reverse_lazy('catalog:blogpost_form')
+
+    def get_context_data(self, *args, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Добавить запись в блог'
+        return context
+
+
+class BlogpostUpdateView(UpdateView):
+    model = Blogpost
+    fields = '__all__'
+    template_name = 'catalog/blogpost_from.html'
+    success_url = reverse_lazy('catalog:blogpost_form')
+
+
+class BlogpostDetailView(DetailView):
+    model = Blogpost
+    template_name = 'catalog/blogpost_detail.html'
+    success_url = reverse_lazy('catalog:blogpost_detail')
+
+
+class BlogpostDeleteView(DeleteView):
+    model = Blogpost
+    template_name = 'catalog/blogpost_confirm_delete.html'
+    success_url = '/catalog/blogpost/'
+
+
+
+
+
