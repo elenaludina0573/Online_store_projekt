@@ -109,8 +109,7 @@ class BlogpostDetailView(DetailView):
 
 class BlogpostDeleteView(DeleteView):
     model = Blogpost
-    template_name = 'catalog/blogpost_confirm_delete.html'
-    success_url = reverse_lazy('catalog:blogpost_confirm_delete')
+    success_url = reverse_lazy('catalog:blogpost_delete')
 
     def get_context_data(self, *args, **kwargs):
         context = super().get_context_data(**kwargs)
