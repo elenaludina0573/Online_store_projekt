@@ -7,8 +7,8 @@
 <form method="post" action="" class="form-floating">
    {% csrf_token %}
    <div class="row">
-       {% for object in object_list|slice:5 %}
        <div class="row row-cols-1 row-cols-md-2 g-4">
+           {% for object in object_list|slice:5 %}
            <div class="col-4">
                <div class="card mb-6 box-shadow">
                    <div class="card-header">
@@ -26,8 +26,8 @@
                        </div>
                    </div>
                </div>
-               {% endfor %}
            </div>
+           {% endfor %}
        </div>
 </form>
 {% endblock %}
