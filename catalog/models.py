@@ -53,8 +53,8 @@ class Blogpost(models.Model):
     content = models.TextField(verbose_name="Контент")
     preview = models.ImageField(upload_to='catalog/', **NULLABLE)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
-    publication_sign = models.BooleanField(default=False, verbose_name="Опубликовать")
-    number_of_views = models.IntegerField(default=0, verbose_name="Количество")
+    publication_sign = models.BooleanField(default=True, verbose_name="Опубликовать")
+    number_of_views = models.IntegerField(default=0, verbose_name="Количество просмотров")
 
     def __str__(self):
         return f'{self.title}'
