@@ -11,8 +11,8 @@ urlpatterns = [
     path('contacts/', ContactsView.as_view(), name="contacts_list"),
     path('catalog/<int:pk>', ProductDetailView.as_view(), name='product_detail'),
     path('catalog/', BlogpostListView.as_view(), name='blogpost_list'),
-    path('catalog/create/', BlogpostCreateView.as_view(), name='blogpost_form'),
-    path('catalog/<int:pk>/', BlogpostDetailView.as_view(), name='blogpost_detail'),
-    path('catalog/<int:pk>/update/', BlogpostUpdateView.as_view(), name='blogpost_update'),
-    path('catalog/<int:pk>/delete/', BlogpostDeleteView.as_view(), name='blogpost_delete'),
+    path('blogpost/create/', BlogpostCreateView.as_view(), name='blogpost_form'),
+    path('blogpost/<int:pk>/', BlogpostDetailView.as_view(), name='blogpost_detail'),
+    path('blogpost/<int:pk>/update/', BlogpostUpdateView.as_view(), name='blogpost_update'),
+    path('blogpost/<int:pk>/delete/', BlogpostDeleteView.as_view(), name='blogpost_delete'),
 ]
