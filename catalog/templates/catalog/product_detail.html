@@ -16,7 +16,7 @@
                 <div class="col-5 text-md-start">
                     {{ object.description|truncatechars:20 }}
                     <p>
-                        <a href="{% url 'catalog:contacts' %}"
+                        <a href="{% url 'catalog:contacts_list' %}"
                            class="btn btn-primary justify-content-md-center my-5">Купить за {{object.purchase_price}} $</a>
                     </p>
                 </div>
