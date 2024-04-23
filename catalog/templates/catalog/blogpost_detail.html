@@ -2,7 +2,7 @@
 {% load my_tags %}
 {% block content %}
 <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">{{ object.title|title }}</h1>
+    <h1 class="display-4">{{ object.title }}</h1>
 </div>
 <main>
     <div class="album py-3 bg-body-tertiary">
@@ -17,7 +17,7 @@
                 </div>
                 <div class="card" style="width: 18rem;">
                     <div class="card-body">
-                        <h5 class="card-title">Описание</h5>
+                        <h5 class="card-title"></h5>
                         <h5 class="card-title">{{ object.slug }}</h5>
                         <p class="card-text">{{ object.content }}</p>
                         <a href="#" class="card-link">{{ object.created_at }}</a>
