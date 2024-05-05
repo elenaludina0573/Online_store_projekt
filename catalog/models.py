@@ -54,7 +54,7 @@ class Blogpost(models.Model):
     preview = models.ImageField(upload_to='catalog/', **NULLABLE)
     created_at = models.DateTimeField(auto_now_add=True, verbose_name="Дата создания")
     publication_sign = models.BooleanField(default=True, verbose_name="Опубликовать")
-    number_of_views = models.IntegerField(default=0, verbose_name="Количество просмотров")
+    number_of_views = models.PositiveIntegerField(default=0, verbose_name="Количество просмотров")
 
     def __str__(self):
         return f'{self.title}'
@@ -62,3 +62,18 @@ class Blogpost(models.Model):
     class Meta:
         verbose_name = 'Запись'
         verbose_name_plural = 'Записи'
+
+
+class Version(models.Model):
+    product = models.ForeignKey(Product, verbose_name="Продукт",
+                                on_delete=models.SET_NULL, **NULLABLE, )
+    number_of_version = models.PositiveIntegerField(verbose_name="Номер версии продукта")
+    name_of_versions = models.CharField(max_length=150, verbose_name="Название версии")
+    is_active_version = models.BooleanField(default=True)
+
+    def __str__(self):
+        return f"{self.product}"
+
+    class Meta:
+        verbose_name = "Версия"
+        verbose_name_plural = "Версии"
