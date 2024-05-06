@@ -15,31 +15,32 @@
                                     <form method="post" enctype="multipart/form-data">
                                         {% csrf_token %}
                                         {{ form.as_p }}
+                                        <button type="submit" class="btn btn-primary">
+                                            {% if object %}
+                                            Сохранить изменения
+                                            {% else %}
+                                            Добавить товар
+                                            {% endif %}
+                                        </button>
                                         {% if object %}
-                                        <button type="submit" class="btn btn-primary">Изменить</button>
-                                        {% else %}
-                                        <button type="submit" class="btn btn-primary">Сохранить</button>
+                                        <div class="col">
+                                            <div class="card shadow-sm">
+                                                <div class="card-header h6">
+                                                    Добавление версии
+                                                </div>
+                                                <div class="card-body">
+                                                    <form method="post">
+                                                        {% csrf_token %}
+                                                        {{ formset.management_form }}
+                                                        {% for form in formset.forms %}
+                                                        {{ form.as_p }}
+                                                        {% endfor %}
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                         {% endif %}
                                     </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row row-cols-1 row-cols-sm-1 row-cols-md-2 g-3">
-                        <div class="col-6">
-                            <div class="row">
-                                <div class="col-12">
-                                    <div class="card">
-                                        <div class="card-body">
-                                            <form method="post"
-                                                  enctype="multipart/form-data">
-                                                {{ formset.management_form}}
-                                                {% for form in formset %}
-                                                {{ formset.as_p }}
-                                                {% endfor %}
-                                            </form>
-                                        </div>
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -49,5 +50,4 @@
         </div>
     </div>
 </main>
-
 {% endblock %}
