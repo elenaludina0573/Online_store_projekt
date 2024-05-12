@@ -1,3 +1,4 @@
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import inlineformset_factory
 from catalog.forms import ProductForm, VersionForm
 from catalog.models import Product, Contacts, Blogpost, Version
@@ -23,7 +24,7 @@ class ProductDetailView(DetailView):
         return context
 
 
-class ProductCreateView(CreateView):
+class ProductCreateView(CreateView, LoginRequiredMixin):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_from.html'
@@ -33,6 +34,16 @@ class ProductCreateView(CreateView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Добавить продукт'
         return context
+
+    def form_valid(self, form):
+        product = form.save()
+        user = self.request.user
+        product.owner = user
+        product.save()
+        return super().form_valid()
+
+
+
 
 
 class ProductUpdateView(UpdateView):
