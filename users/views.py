@@ -25,7 +25,7 @@ class RegisterView(CreateView):
     model = User
     form_class = UserRegisterFrom
     template_name = 'users/register.html'
-    success_url = reverse_lazy('users/login')
+    success_url = reverse_lazy('users:login')
 
     def form_valid(self, form):
         user = form.save()
@@ -72,3 +72,5 @@ class ResetPassword(TemplateView):
             from_email=EMAIL_HOST_USER,
             recipient_list=[user.email]
         )
+        return redirect('users:login')
+
