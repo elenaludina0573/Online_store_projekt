@@ -7,13 +7,13 @@ from django.urls import reverse_lazy
 from pytils.translit import slugify
 
 
-class ProductListView(ListView):
+class ProductListView(ListView, LoginRequiredMixin):
     model = Product
     template_name = 'catalog/product_list.html'
     extra_context = {'title': 'Продукты на любой вкус'}
 
 
-class ProductDetailView(DetailView):
+class ProductDetailView(DetailView, LoginRequiredMixin):
     model = Product
 
     def get_context_data(self, **kwargs):
@@ -43,10 +43,7 @@ class ProductCreateView(CreateView, LoginRequiredMixin):
         return super().form_valid()
 
 
-
-
-
-class ProductUpdateView(UpdateView):
+class ProductUpdateView(UpdateView, LoginRequiredMixin):
     model = Product
     form_class = ProductForm
     template_name = 'catalog/product_from.html'
@@ -74,7 +71,7 @@ class ProductUpdateView(UpdateView):
             return self.render_to_response(self.get_context_data(form=form, formset=formset))
 
 
-class ProductDeleteView(DeleteView):
+class ProductDeleteView(DeleteView, LoginRequiredMixin):
     model = Product
     success_url = reverse_lazy('catalog:product_list')
 
