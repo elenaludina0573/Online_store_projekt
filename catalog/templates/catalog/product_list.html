@@ -27,10 +27,14 @@
                                href="{% url 'catalog:product_detail' object.pk %}">
                                 Подробнее
                             </a>
+                            {% if user == object.owner or perms.product.cancellation_of_publication
+                            and perms.product.changes_the_description
+                            and perms.product.changes_the_category %}
                             <a type="button" class="btn btn-lg btn-block btn-outline-primary"
                                href="{% url 'catalog:product_update' object.pk %}">
                                 Изменить
                             </a>
+                            {% endif %}
                             <a type="button" class="btn btn-lg btn-block btn-outline-primary"
                                href="{% url 'catalog:product_delete' object.pk %}">
                                 Удалить
