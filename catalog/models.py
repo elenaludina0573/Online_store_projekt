@@ -26,7 +26,7 @@ class Product(models.Model):
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
     owner = models.ForeignKey(User, on_delete=models.SET_NULL, verbose_name='Владелец', **NULLABLE)
-
+    publication = models.BooleanField(default=False, verbose_name='публикация')
 
     def __str__(self):
         return f'{self.name}'
@@ -34,6 +34,12 @@ class Product(models.Model):
     class Meta:
         verbose_name = 'Продукт'
         verbose_name_plural = 'Продукты'
+        permissions = [
+            ('cancellation_of_publication', 'Canceling the publication of the product'),
+            ('changes_the_description', 'Changes the description of any product'),
+            ('changes_the_category', 'Changes the category of any product'),
+
+        ]
 
 
 class Contacts(models.Model):
