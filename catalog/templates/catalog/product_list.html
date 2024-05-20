@@ -14,7 +14,7 @@
     <div class="row">
         <div class="row row-cols-1 row-cols-md-2 g-4">
             {% for object in object_list|slice:5 %}
-            <div class="col-4">
+            <div class="col-6">
                 <div class="card mb-6 box-shadow">
                     <div class="card-header">
                         <h4 class="my-0 font-weight-normal">
@@ -27,13 +27,11 @@
                                href="{% url 'catalog:product_detail' object.pk %}">
                                 Подробнее
                             </a>
-                            {% if user == object.owner or perms.product.cancellation_of_publication
-                            and perms.product.changes_the_description
-                            and perms.product.changes_the_category %}
-                            <a type="button" class="btn btn-lg btn-block btn-outline-primary"
-                               href="{% url 'catalog:product_update' object.pk %}">
-                                Изменить
-                            </a>
+                            {% if user == object.owner or perms.product.cancellation_of_publication and perms.product.changes_the_description and perms.product.changes_the_category %}
+                                <a type="button" class="btn btn-lg btn-block btn-outline-primary"
+                                    href="{% url 'catalog:product_update' object.pk %}">
+                                    Изменить
+                                </a>
                             {% endif %}
                             <a type="button" class="btn btn-lg btn-block btn-outline-primary"
                                href="{% url 'catalog:product_delete' object.pk %}">
