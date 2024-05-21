@@ -30,6 +30,7 @@ class RegisterView(CreateView):
     def form_valid(self, form):
         user = form.save()
         user.is_active = False
+        user.set_password(user.password)
         verification_code = secrets.token_hex(16)
         user.verification_code = verification_code
         user.save()
