@@ -2,16 +2,27 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 from django.core.exceptions import PermissionDenied
 from django.forms import inlineformset_factory
 from catalog.forms import ProductForm, VersionForm, ProductModeratorForm
-from catalog.models import Product, Contacts, Blogpost, Version
+from catalog.models import Product, Contacts, Blogpost, Version, Category
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 from pytils.translit import slugify
+
+
+from config.services import get_cached_data
 
 
 class ProductListView(LoginRequiredMixin, ListView):
     model = Product
     template_name = 'catalog/product_list.html'
     extra_context = {'title': 'Продукты на любой вкус'}
+
+    # def get_queryset(self):
+    #     return get_cached_data(self.model)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Продукты на любой вкус'
+        return context
 
 
 class ProductDetailView(LoginRequiredMixin, DetailView):
@@ -41,7 +52,7 @@ class ProductCreateView(LoginRequiredMixin, CreateView):
         user = self.request.user
         product.owner = user
         product.save()
-        return super().form_valid()
+        return super().form_valid(form)
 
 
 class ProductUpdateView(LoginRequiredMixin, UpdateView):
@@ -90,6 +101,21 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
         context = super().get_context_data(**kwargs)
         context['title'] = 'Удалить продукт'
         return context
+
+
+class CategoryListView(LoginRequiredMixin, ListView):
+    model = Category
+    template_name = 'catalog/category_list.html'
+    context_object_name = 'objects_list'
+
+    def get_queryset(self):
+        return get_cached_data(self.model)
+
+
+class CategoryDetailView(LoginRequiredMixin, DetailView):
+    model = Category
+    template_name = 'catalog/category_detail.html'
+    context_object_name = 'objects_list'
 
 
 class ContactsView(ListView):
