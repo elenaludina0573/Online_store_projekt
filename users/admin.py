@@ -10,3 +10,4 @@ class UserAdmin(admin.ModelAdmin):
     list_display = ['pk', 'email', 'is_active', 'is_staff', 'is_superuser']
 
 
+
