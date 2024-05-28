@@ -2,6 +2,7 @@ import random
 import secrets
 import string
 
+from django.conf import settings
 from django.contrib.auth.views import LoginView, LogoutView
 from django.core.mail import send_mail
 from django.shortcuts import get_object_or_404, redirect, render
@@ -39,17 +40,23 @@ class RegisterView(CreateView):
         send_mail(
             subject='Подтверждение почты',
             message=f'Привет, переди по ссылке для подтверждения почты {url}',
-            from_email=EMAIL_HOST_USER,
+            from_email=settings.EMAIL_HOST_USER,
             recipient_list=[user.email],
         )
+        user.save()
         return super().form_valid(form)
 
 
 def email_verification(request, verification_code):
+    verification_code = request.POST.get('verification_code')
     user = get_object_or_404(User, verification_code=verification_code)
-    user.is_active = True
-    user.save()
-    return redirect(reverse("users:login"))
+    if user:
+        user.is_active = True
+        user.save()
+        return redirect(reverse("users:login"))
+    else:
+        return redirect(reverse('users:register'))
+
 
 
 class ResetPassword(TemplateView):
