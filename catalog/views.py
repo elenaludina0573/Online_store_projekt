@@ -16,8 +16,8 @@ class ProductListView(LoginRequiredMixin, ListView):
     template_name = 'catalog/product_list.html'
     extra_context = {'title': 'Продукты на любой вкус'}
 
-    # def get_queryset(self):
-    #     return get_cached_data(self.model)
+    def get_queryset(self):
+        return get_cached_data(self.model)
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -106,16 +106,30 @@ class ProductDeleteView(LoginRequiredMixin, DeleteView):
 class CategoryListView(LoginRequiredMixin, ListView):
     model = Category
     template_name = 'catalog/category_list.html'
-    context_object_name = 'objects_list'
+    extra_context = {'title': 'Категории продуктов'}
 
     def get_queryset(self):
         return get_cached_data(self.model)
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['title'] = 'Категории продуктов'
+        return context
+
 
 class CategoryDetailView(LoginRequiredMixin, DetailView):
     model = Category
+    extra_context = {'title': 'Категории продуктов'}
     template_name = 'catalog/category_detail.html'
-    context_object_name = 'objects_list'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        category_item = self.get_object()
+        context['category_item'] = category_item
+        context['title'] = f'Категория #{category_item.id}'
+        return context
+
+
 
 
 class ContactsView(ListView):
